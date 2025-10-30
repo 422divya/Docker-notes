@@ -1,0 +1,13 @@
+How data is persisted in Docker container?
+
+==> Example we have mysql DB container. WHen DB and tables are created data files are stored in location /var/lib/mysql inside docker container.
+Docker container has its own isolated FS and any changes to any file happen within the container. We have lot of data in DB. If we delete the mysql container all the data will be 
+deleted along with container.
+To persist data map the directory outside container on docker host to a dir inside the container.
+
+==> Create dir on docker host /opt/data and map it to the container dir. 
+
+# docker run -v /opt/data:/var/lib/mysql mysql
+
+==> When docker container runs it will implicitly mount the external directory to a folder inside docker container. This way all the DB data will now be stored in external volume
+at /opt/data and will persist even if we remove container.
