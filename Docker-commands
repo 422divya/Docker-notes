@@ -78,3 +78,9 @@ is internal IP and is only accessible within Docker host, so users outside of do
 SO we need to use the IP of the docker host. We must map the port inside docker container to a free port on docker host.
 
 # docker run -p 80:5000 apache  >> mapped port 80 of docker host to port 5000 on docker container
+
+14- docker inspect:
+
+To see additional details of specific container
+
+# docker inspect container_name or id
