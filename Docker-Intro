@@ -34,4 +34,5 @@ DOcker Image: It is package or the template just like VM template. It is use to 
 Containers: running instances of images that are isolated and have their own env set
 
 
-
+==> When you run docker pull or docker run, Docker downloads the image and stores it on your Linux system under the default directory /var/lib/docker. 
+This directory contains all Docker data including images, containers, volumes, and networks.
