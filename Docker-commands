@@ -1,0 +1,47 @@
+1- Run- start a container
+# docker run nginx  >> will run instance of nginx application on docker host. If the image is not present on the host it will pull the img from docker hub
+
+2- ps- list containers
+# docker ps   >> List all running containers and some basic info about them 
+
+To see all containers running or not use -a option
+# docker ps -a
+
+3- stop- stop container
+# docker stop container_name or id
+
+4- rm-remove container 
+What if we want to get rid of the stopped container which is consuming space we can use rm to remove stopped or exited container
+
+# docker rm 
+
+5- If we delete the nginx conatiner, we have the nginx image downloaded for it, to get rid of it.
+images- to list images
+
+# docker images  >> list all images along with size
+
+to remove image 
+# docker rmi nginx   >> verify no container is running using that img before attempting to remove. You must stop and delete container before deleting img.
+
+6- pull- pull img
+
+# docker pull img_name  >> pull img 
+
+7- WHen we run the ubuntu container using docker run it will run and exits immediately. Why because unlike VM containers are not meant to host OS, they are meant to run specific
+task or process such as to host an instance of web server or app server or DB. Once the task is complete the conatiner exists. COntainer only live as ling as process inside it 
+is alive.
+If the web server inside the container is stopped or crash then the container exists.
+This is why when we run container from ubuntu img it stops immediately because ubuntu is just img of OS that is used as base img for other app. There is not process or application
+running by default
+
+8- To execute a command on running container use Exec.
+
+# docker exec container_name cat /etc/hosts
+
+9- Now when we run "docker run img_name" it runs in foreground in attached mode meaning u will be attached to console or std out of the docker container and u will see output
+of the web service on ur screen. When we press ctrl+c to stop container and app hosted on container exists and u get back to ur prompt.
+
+Another option is to run the docker container in deattached mode by providing -d option. This will run container in background mode and u will be back to ur prompt immediately.
+
+# docker run -d img_name
+
