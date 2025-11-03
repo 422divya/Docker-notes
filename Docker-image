@@ -1,0 +1,14 @@
+==> TO create our own docker image we need to create Docker file mentioning the OS, dependencies etc as below
+
+Dockerfile
+FROM Ubuntu  >> what the baseos should be for this container
+RUN yum update && yum install -y python   >> RUN to run particular commands on base image
+RUN pip install flask flask-mysql
+COPY . /opt/source-code      >>> Copies file from local system on to the docker image
+ENTRYPOINT FLASK_APP=/opt/source-code/app.py flask run      >> ENTRYPOINT allows us to specify a command that will be run when the image is run as container
+
+==> To build image run below
+# docker build . -f Dockerfile -t custom_image
+
+
+==> Each line of instructions in Dockerfile creates a new layer in Docker image
