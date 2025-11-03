@@ -1,0 +1,41 @@
+==>Containers are not meant to host an OS
+==> Containers are meant to run specific task or process, such as to host an instance of web server or app server or DB.
+==> Once the task is completed the container exits
+==> Container only lives as long as process inside it lives, if webs server inside the container is stopped or crashes the container exists.
+  ==> SO who defines what process is run within the container?
+  ==>If u look at docker file for popular docker images like nginx you will see an instruction called CMD which stands for command which defines the program that will run within
+container
+==> When it starts it will run nginx command =, for mysql image it is mysqld command
+
+CMD command param1 
+ex- CMD sleep 5
+
+  ==> Now when we create img and run container, it will be running for 5 min and will exit.
+  ==> What if we need to chnage the sleep time of the container currently it is hardcoded to 5 sec
+
+1 option:
+  $ docker run container_name sleep 10
+
+  EX- $ docker run ubuntu-sleeper sleep 10
+
+==> But name of the image in itself implies that container will sleep, so we shouldn't have to specify the sleep command again. Instead we would like to run container as
+  $ docker run ubuntu-sleep 10
+
+  ==> We only want to pass the number of sec container should sleep and sleep command should be called automatically
+
+==> So this can be done using ENTRYPOINT
+
+FROM Ubuntu
+ENTRYPOINT ["sleep"] 
+
+==> ENTRYPOINT instruction is like the command instruction as you can specify the program that will be run when the container starts and whatever u specify on the 
+command line in above case it will get appended to the entry point. So the command when container start is sleep 10
+
+==> Incase of CMD instruction the command line parameters passed will get replaces entirely, whereas incase of ENTRYPOINT the command line parameters will get appended
+
+==> To modify the ENTRYPOINT during runtime, we can override it by using entrypoint option in docker run command
+
+$ docker run --entrypoint sleep2.0 ubuntu-sleeper 10
+
+
+  
