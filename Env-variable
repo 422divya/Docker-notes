@@ -1,0 +1,13 @@
+==> We can pass env variable while running container
+
+# docker run -e APP_COLOR=blue img_name
+
+==> How to find the env variable set on container thats already running
+  $ docker inspect container_name
+
+
+==> Run a container named blue-app using image kodekloud/simple-webapp and set the environment variable APP_COLOR to blue. 
+Make the application available on port 38282 on the host. The application listens on port 8080.
+
+ ➜  docker run -d -e APP_COLOR=blue -p 38282:8080 --name blue-app kodekloud/simple-webapp
+169b3aded5add362f68713b66ffeaa133ec368d9d8aec1e5f9b4bd1a55158ebe
