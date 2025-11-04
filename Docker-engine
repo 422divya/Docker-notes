@@ -1,0 +1,24 @@
+==> Try to understand how exactly applications are containerized in Docker, How does it work under the hood
+==> Docker uses namespaces to isolate the workspace. Process ids, network, interprocess communication, mounts are created in there own namespaces providing isolation 
+between containers
+==> Lets take Process Id namespace. Wheneve Liux system boots up its starts with just 1 process with PID 1. This is parent process and starts all other processes in system.
+==> When system boots up completely we have many process running which can be seen by ps command.
+==> PID are unique and 2 process cannot have same ID.
+==> Now we were to create container which is basically child system within current system. CHild system need to think that it is an independentsystem on it own and it has its 
+own set of processes originating from parent process with process ID of 1.
+==> But there is no hard isloation between containers and underlying hosts. So processes running inside the container are infact processes running on underlying host. And 
+2 processes cannot have same pid of 1.
+==> THis is where namespace come into play. With process ID namespaces each process can have multiple process IDs associated with it. Example: when process starts in container
+it's actually just another set of processes on base linux system and it gets next available PID. However they get another PID stating with PID 1 in container namespace which is only
+visible inside the container, so container thinks it has its own parent process tree and so it is an independent system
+
+==> How do we see this on host. Lets say we need to run nginx container and it need nginx service. If we were to list all services inside the docker container we see that the nginx
+service running with pid 1. This is process ID of the service inside of container namespace.
+
+==> if we list service on host we can see the same service but with different pid
+
+==> how much of the resources are dedicated to the host and the containers and how does Docker manage and share the resources between containers.
+==> By default there is not restriction as to how much of resource a container can use and hence container may end up utilizing all resources on the underlying host.
+
+==> There is way to restrict a container can use cpu or mem. Docker uses Control group(cgroups) to restrict amount of HW resources allocated to containers.
+This can be done using --cpus option to docker run command
