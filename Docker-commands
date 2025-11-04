@@ -84,3 +84,16 @@ SO we need to use the IP of the docker host. We must map the port inside docker 
 To see additional details of specific container
 
 # docker inspect container_name or id
+
+
+15- to check the list of instruction of docker image and if docker file is not there use below command:
+
+# docker history image_id
+
+16- To actually see the disk space consumption by image without duplicates
+
+# docker system df
+
+# docker system df -v 
+
+# docker images >> command show size of images including duplicates
