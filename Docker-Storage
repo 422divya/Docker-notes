@@ -1,0 +1,27 @@
+How docker stores data on local FS 
+==> when u install docker on system it creates folder structure at /var/lib/docker. It will have multiple sub folder under it. In this docker stores its data by default.
+Data means files related to images and containers running on the docker host
+
+Volumes:
+
+==> To preserve the data created by the container we could add persistent volume to the container. 
+==> First create volume using below command:
+# docker volume create vol_name  >> It creates folder under /var/lib/docker/volumes in host
+
+==> To mount the vol inside the docker container run below command:
+
+# docker run -v vol_name:/var/lib/mysql mysql
+
+==> What if we have our data already at anotehr location. Example- lets say we have external storage on docker host /data and we would like to store DB data on that vol.
+Give full path to vol /data/mysql so it will create a container and mount folder to the container. THis is called bind mounting
+
+# docker run -v /data/mysql:/var/lib/mysql mysql   >> give full path /data/
+
+==> 2 types of mount:
+1- Volume mount: mounts vol from vol dir
+2- Bind mount: mounts dir from any location on docker host
+
+
+==> Currently instead of -v use --mount
+
+# docker run --mount type=bind, source=/data/mysql,target=/var/lib/mysql mysql
