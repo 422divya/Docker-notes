@@ -36,3 +36,16 @@ Containers: running instances of images that are isolated and have their own env
 
 ==> When you run docker pull or docker run, Docker downloads the image and stores it on your Linux system under the default directory /var/lib/docker. 
 This directory contains all Docker data including images, containers, volumes, and networks.
+
+
+==> The restart policy set to always in a Docker container ensures that the container will automatically restart 
+whenever it stops, regardless of the exit status. This policy is useful for maintaining high availability, 
+as it guarantees that the container runs continuously unless it is explicitly stopped.
+
+When you specify --restart=always during container creation, Docker will restart the container automatically after any 
+failure or stop.​
+
+It also means the container will start automatically on Docker daemon or host reboot.​
+
+If you manually stop the container with docker stop, Docker will not restart it unless the daemon restarts or you manually 
+restart it later
