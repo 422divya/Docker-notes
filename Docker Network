@@ -1,0 +1,40 @@
+==> When we install docker it creates 3 networks automatically 
+1- bridge 
+2- none
+3- host.
+
+==> Bridge is default network container gets attached to
+
+==> To associate container with any network 
+$ docker run ubuntu --network=none
+
+==> Bridge network is private internal network created by docker on host. All containers get attached to this network by default and they get internal IP address.
+Containers can access each other using this internal IP
+
+==> To access any containers from outside world map ports of this containers to port on docker host
+
+==> Another way to access container externally si to associate container to host networks.
+
+$ docker run ubuntu --network=host
+
+==> Example: If we run web server on port 5000 on container it is automatically accessible on same port externally without requiring any port mapping as web container use hosts network
+
+==> WIth none network containers are not attached to any network and dosent have any access to external network
+
+
+==> How we can isloate the containers within docker host. Example: first 2 web containers on internal network 172 and second 2 web containers on different internal network 182
+==> By default docker only creates 1 internal bridge network. We could create our own internal network using command 
+
+$ docker network create --driver bridge --subnet 182.18.0.0/16 custom-isolated-network
+$ docker network ls   >>> to list all networks
+
+$ docker inspect container_name  >> get all details including network
+
+==> Containers can reach each other by using their names. Ex- we have web and mysql db container running on same host. How we can get web server to access DB on DB container.
+One we can do is use internal IP address assigned to mysql container. But IP gets chg when container is recreated so this is not ideal way. So use container name.
+
+==> Docker has build-in DNS server that helps the container to resolve each other using container name.
+
+==> Build int DNS server runs at 127.0.0.11
+
+==> DOcker uses network namespaces that create separate namespaces for each container
