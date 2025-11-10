@@ -1,6 +1,6 @@
 Why Docker?
-==> With docker we can run each component in separate container with its own dependencies and its own libraries all within same VM and OS bit within separate environments 
-or containers we just had to build the docker configurations once and all and others now get started with simple docker run command irrespective of what OS they run.
+==> With docker we can run each component in separate container with its own dependencies and its own libraries all within same VM and OS but within separate environments 
+or containers. We just have to build the docker configurations once and get started with simple docker run command irrespective of what OS they run.
 
 WHat are containers?
 ==> They are completely isolated environments as in they can have their own process and services, their own network interfaces, their own mounts just like VM except they all
